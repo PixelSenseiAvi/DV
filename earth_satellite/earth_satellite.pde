@@ -10,8 +10,7 @@ Star[] stars = new Star[7];
 
 
 void setup()
-{
-  
+{  
   //starfield
   for(int i =0; i <stars.length; i++){
     stars[i] = new Star();
@@ -34,7 +33,12 @@ void setup()
 
 void draw()
 {
-  background(0);
+  background(0);  
+  //Text
+  textSize(24);
+  fill(255);
+  text("1960: GRB detected by spy satellite", 10, 30);
+  
   translate(width/2, height/2, 0);
   
   //starfield
