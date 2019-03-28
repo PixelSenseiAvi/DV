@@ -9,15 +9,15 @@ float x, y, x1, y1;
 float val1;
 float width_factor = 100, height_factor = 150;
 float explode_size = (float)shapeSize; 
-int opacity =255;
+int opacity =200;
 PImage bg;
-
+float fillColor = 255, blackhole_size = 20;
 
 void setup() {
-  size(500, 500);
+  size(600, 600);
   smooth();
   noStroke();
-  //bg = loadImage("blue.jpg");
+  bg = loadImage("blue_600x600.jpg");
   
   val1 = 3.0f;
 }
@@ -42,8 +42,27 @@ void draw() {
     height_factor-=0.2;
   }
   
+  // if(opacity>10)
+  // {
+  //   opacity--;
+  // }
+  //else{
+
+  // // delay(1000);
+  //}
+  
   if(height_factor<=0 && width_factor <=0)
-  {draw_explosion();}
+  {draw_explosion();
+    fillColor-=2;
+    if(blackhole_size<(width/2)-110)
+    {  blackhole_size+=0.5;}
+    draw_black_hole();
+    
+    if(opacity>11)
+   {
+     opacity-=2;
+   }
+  }
 }
 
 void draw_neutron_one()
@@ -65,7 +84,7 @@ void draw_neutron_one()
   shapeA[currentShape] = 255; 
 
   for (int i=0; i<numShapes ; i++) {
-    fill(255, shapeA[i]);
+    fill(fillColor, shapeA[i]);
     ellipse(shapeX[i], shapeY[i], shapeSize, shapeSize);
     shapeA[i] -= 255/numShapes;
   }
@@ -96,7 +115,7 @@ void draw_neutron_two()
   shapeA[currentShape] = 255;
 
   for (int i=0; i<numShapes ; i++) {
-    fill(255, shapeA[i]);
+    fill(fillColor, shapeA[i]);
     ellipse(shapeX[i], shapeY[i], shapeSize, shapeSize);
     shapeA[i] -= 255/numShapes;
   }
@@ -111,6 +130,10 @@ void draw_neutron_two()
 
 void draw_explosion()
 {
+  //Text
+  textSize(24);
+  text("Impact leads to creation of Black Hole", 10, 30);
+  
   shapeX[currentShape] = x;
   shapeY[currentShape] = y;
   shapeA[currentShape] = 255; 
@@ -126,16 +149,17 @@ void draw_explosion()
   currentShape++;
   currentShape %= numShapes; 
   
-  if(explode_size<width/2 && explode_size<height/2)
+  if(explode_size<(width/2)-80 && explode_size<(height/2)-80)
   {
-    explode_size+=0.5;
+    explode_size+=0.7;
   }
   
-  if(opacity>10){opacity--;}
-  else{
-  //run blackhole script here
+}
+
+
+void draw_black_hole()
+{
+  fill(fillColor);
+  ellipse(250,250,blackhole_size,blackhole_size);
   
-    delay(1000);
-    exit();
-  }
 }
