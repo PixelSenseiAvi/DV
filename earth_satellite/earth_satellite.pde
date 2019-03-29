@@ -5,17 +5,28 @@ PImage img, bg;
 PShape globe;
 PShape satellite;
 
-
-Star[] stars = new Star[7];
-
+int star_num_array[];
+Star[] stars;
+int count =0;
 
 void setup()
 {  
+  
+  //load lines
+  String [] lines = loadStrings("swift_grb.csv");
+  star_num_array = new int[lines.length-1];
+  for (int i =1; i< lines.length; i++) {
+      String[] pieces = split(lines[i], ',');
+      // do something with each field
+      star_num_array[i-1] = Integer.parseInt(pieces[1]);
+  }
+  
+  stars  = new Star[lines.length-1];
+  
   //starfield
   for(int i =0; i <stars.length; i++){
     stars[i] = new Star();
   }
-  
   
   bg = loadImage("blue_resize.jpg");
   size(500, 500, P3D);
@@ -29,6 +40,8 @@ void setup()
   globe = createShape(SPHERE, 50);
   globe.setTexture(img);
   
+  
+  
 }
 
 void draw()
@@ -41,12 +54,18 @@ void draw()
   
   translate(width/2, height/2, 0);
   
+  
   //starfield
   for(int i =0; i <stars.length; i++){
     stars[i].update();
     stars[i].show();
   }
   
+  if(count < stars.length)
+  {  count++;
+  }else{
+    count = 0;
+  }
   
   //earth
   //fill(32, 160, 255);
