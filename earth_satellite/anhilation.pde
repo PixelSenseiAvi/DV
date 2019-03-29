@@ -54,7 +54,7 @@ void render_scene1()
   //Text
   textSize(24);
   fill(255);
-  text("1960: GRB detected by spy satellite", 10, 30);
+  text("If GRB pointed at earth", 10, 30);
   
   translate(width/4, height/2, 0);
   
@@ -98,7 +98,7 @@ void render_scene2()
   //Text
   textSize(24);
   fill(255);
-  text("1960: GRB detected by spy satellite", 10, 30);
+  text("Earth will fry in a jitter", 10, 30);
   
   translate(width/4, height/2, 0);
   
